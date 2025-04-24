@@ -18,10 +18,11 @@
 
 		<!-- Wybór gry -->
 		<TextBlock Text="Wybierz grę:" FontSize="16" Margin="0,20,0,5"/>
-		<Button Content="Poker" Width="200"/>
-		<Button Content="Makao" Width="200"/>
-		<Button Content="Wojna" Width="200"/>
-		<Button Content="Tysiąc" Width="200"/>
+		<!--<Button Content="Poker" Width="200"/-->
+		<!--Button Content="Makao" Width="200"/-->
+		<!--Button Content="Wojna" Width="200"/-->
+		<!--Button Content="Tysiąc" Width="200"/-->
+		
 	</StackPanel>
 </UserControl>
 
