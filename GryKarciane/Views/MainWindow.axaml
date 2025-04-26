@@ -15,6 +15,7 @@
 
 		<Button Content="Zaloguj" Width="200" Command="{Binding LoginCommand}" />
 		<Button Content="Graj jako gość" Width="200" Command="{Binding GuestCommand}" />
+		<Button Content="Historia rozgrywek" Width="200" Click="Historia_Click" />
 	</StackPanel>
 </UserControl>
 

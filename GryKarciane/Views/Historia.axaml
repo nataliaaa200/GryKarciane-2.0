@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GryKarciane.Historia"
+        Title="Historia">
+	<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="15">
+		<TextBlock Text="Gry:" FontSize="24" HorizontalAlignment="Center" Margin="0 0 0 20"/>
+		<Button Content="Oczko" Width="100" Height="40" Click="Oczko_Click"/>
+		<Button Content="Gapa" Width="100" Height="40" Click="Gapa_Click"/>
+		<Button Content="Cos Kingi" Width="100" Height="40" Click="Kinga_Click"/>
+	</StackPanel>
+</Window>

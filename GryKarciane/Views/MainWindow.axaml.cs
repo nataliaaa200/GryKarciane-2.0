@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using GryKarciane.ViewModels;
 
 namespace GryKarciane.Views
@@ -29,6 +30,12 @@ namespace GryKarciane.Views
 
             gameSelectionWindow.Show();
             this.Hide(); // Ukrywamy główne okno logowania, gdy otwieramy okno wyboru gry
+        }
+
+        private void Historia_Click(object? sender, RoutedEventArgs e)
+        {
+            var gameWindow = new Historia();
+            gameWindow.Show();
         }
     }
 }
