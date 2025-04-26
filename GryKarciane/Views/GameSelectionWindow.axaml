@@ -13,7 +13,7 @@
 		<TextBlock Text="{Binding WelcomeMessage}" FontSize="18" Margin="0,0,0,20"/>
 
 		<Button Content="Poker" Width="200" />
-		<Button Content="Makao" Width="200" />
+		<Button Content="Gapa" Width="200" Click="Gapa_Click" />
 		<Button Content="Wojna" Width="200" />
 	</StackPanel>
 </Window>

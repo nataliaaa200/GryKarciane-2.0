@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using System;
 
 namespace GryKarciane.Views
@@ -12,6 +13,16 @@ namespace GryKarciane.Views
             InitializeComponent();
             PlayerName = playerName;
         }
+
+
+
+        private void Gapa_Click(object sender, RoutedEventArgs e)
+        {
+            var gapaOkno = new Gapa(PlayerName);
+            gapaOkno.Show();
+            this.Close(); 
+        }
+
 
         // Dodajmy logikę zamknięcia gry
         private void EndGame()
