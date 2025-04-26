@@ -1,31 +1,48 @@
-﻿using System.ComponentModel;
+﻿using ReactiveUI;
+using System;
+using System.Reactive;
+using GryKarciane.Views;
 
 namespace GryKarciane.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ReactiveObject
     {
         private string _login;
-
-        // Właściwość do powiązania loginu w UI
         public string Login
         {
             get => _login;
-            set
-            {
-                if (_login != value)
-                {
-                    _login = value;
-                    OnPropertyChanged(nameof(Login));
-                }
-            }
+            set => this.RaiseAndSetIfChanged(ref _login, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ReactiveCommand<Unit, Unit> LoginCommand { get; }
+        public ReactiveCommand<Unit, Unit> GuestCommand { get; }
 
-        // Metoda powiadamiająca o zmianach właściwości
-        protected virtual void OnPropertyChanged(string propertyName)
+        // EVENT - informuje, że trzeba otworzyć nowe okno
+        public event Action<string> OnLoginCompleted;
+
+        public MainViewModel()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            LoginCommand = ReactiveCommand.Create(DoLogin);
+            GuestCommand = ReactiveCommand.Create(DoGuestLogin);
+        }
+
+        private void DoLogin()
+        {
+            if (string.IsNullOrWhiteSpace(Login))
+                return;
+
+            OnLoginCompleted?.Invoke(Login);
+        }
+
+        private void DoGuestLogin()
+        {
+            Login = "Gość";
+            OnLoginCompleted?.Invoke(Login);
         }
     }
 }
+
+
+
+
+

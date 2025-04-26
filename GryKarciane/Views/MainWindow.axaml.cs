@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using GryKarciane.ViewModels;
 
 namespace GryKarciane.Views
 {
@@ -7,7 +8,31 @@ namespace GryKarciane.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            if (DataContext is MainViewModel vm)
+            {
+                vm.OnLoginCompleted += Vm_OnLoginCompleted;
+            }
+        }
+
+        private void Vm_OnLoginCompleted(string playerName)
+        {
+            // Otwórz okno wyboru gry i przekazanie loginu gracza
+            var gameSelectionWindow = new GameSelectionWindow(playerName);
+
+            // Zarejestruj zamknięcie okna gry, aby nie zamykało całego programu
+            gameSelectionWindow.Closed += (sender, e) =>
+            {
+                // Po zamknięciu okna gry, wróć do okna logowania
+                this.Show();
+            };
+
+            gameSelectionWindow.Show();
+            this.Hide(); // Ukrywamy główne okno logowania, gdy otwieramy okno wyboru gry
         }
     }
 }
+
+
+
 

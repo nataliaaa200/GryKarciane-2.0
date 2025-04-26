@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GryKarciane.ViewModels"
+        x:Class="GryKarciane.Views.GameSelectionWindow"
+        Width="400" Height="300"
+        Title="Wybór Gry">
+
+	<Window.DataContext>
+		<vm:GameSelectionViewModel />
+	</Window.DataContext>
+
+	<StackPanel Margin="20" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+		<TextBlock Text="{Binding WelcomeMessage}" FontSize="18" Margin="0,0,0,20"/>
+
+		<Button Content="Poker" Width="200" />
+		<Button Content="Makao" Width="200" />
+		<Button Content="Wojna" Width="200" />
+	</StackPanel>
+</Window>
+
