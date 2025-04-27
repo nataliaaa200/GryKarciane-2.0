@@ -19,9 +19,16 @@ namespace GryKarciane.Views
         private void Gapa_Click(object sender, RoutedEventArgs e)
         {
             var gapaOkno = new Gapa(PlayerName);
+
+            gapaOkno.Closed += (s, args) =>
+            {
+                this.Show(); // Po zamknięciu Gapy pokaż z powrotem to okno
+            };
+
             gapaOkno.Show();
-            this.Close(); 
+            this.Hide();
         }
+
 
 
         // Dodajmy logikę zamknięcia gry

@@ -10,12 +10,48 @@ using System.Threading.Tasks;
 using System.Timers;
 using Avalonia.Threading;
 using Avalonia.Media;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
 
 namespace GryKarciane;
 
 public partial class Gapa : Window
 {
-    public enum Suit { Pik, Kier, Karo, Trefl }
+    public class GameResult
+
+    {
+        public string PlayerName { get; set; }
+        public TimeSpan GameTime { get; set; }
+        public bool IsWin { get; set; }
+    }
+
+    public static class GameResultSaver
+    {
+        private static readonly string FilePath = "wyniki_gapa.json";
+
+        public static void SaveResult(GameResult result)
+        {
+            List<GameResult> results = LoadResults();
+
+            results.Add(result);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(results, options);
+            File.WriteAllText(FilePath, json);
+        }
+
+        public static List<GameResult> LoadResults()
+        {
+            if (!File.Exists(FilePath))
+                return new List<GameResult>();
+
+            string json = File.ReadAllText(FilePath);
+
+            return JsonSerializer.Deserialize<List<GameResult>>(json) ?? new List<GameResult>();
+        }
+    }
+        public enum Suit { Pik, Kier, Karo, Trefl }
 
     public class Card
     {
@@ -48,9 +84,11 @@ public partial class Gapa : Window
     private List<Card> playerCards = new();
     private Card topCard;
     private Random rng = new();
+    private readonly string playerName;
     public Gapa(string playerName)
     {
         InitializeComponent();
+        this.playerName = playerName;
         StartGame();
 
     }
@@ -132,9 +170,20 @@ public partial class Gapa : Window
     {
         timer.Stop();
         stopwatch.Stop();
+
+        var result = new GameResult
+        {
+            PlayerName = playerName, // musisz mieć gdzieś zapisane `playerName`
+            GameTime = stopwatch.Elapsed,
+            IsWin = (message == "Wygrałeś!")
+        };
+
+        GameResultSaver.SaveResult(result);
+
         await MessageBox.Show(this, message, "Koniec gry");
         Close();
     }
+
 
 
     private void DrawCard_Click(object? sender, RoutedEventArgs e)

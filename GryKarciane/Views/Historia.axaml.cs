@@ -15,7 +15,8 @@ public partial class Historia : Window
 
     private void Gapa_Click(object? sender, RoutedEventArgs e)
     {
-
+        var historiaGapa = new HistoriaGapa();
+        historiaGapa.Show();
     }
 
     private void Oczko_Click(object? sender, RoutedEventArgs e)
