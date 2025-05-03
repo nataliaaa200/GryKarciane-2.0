@@ -28,4 +28,10 @@ public partial class Historia : Window
     {
 
     }
+
+    private void Gwint_Click(object? sender, RoutedEventArgs e)
+    {
+        var gwintHistoria = new GwintHistoria();
+        gwintHistoria.Show();
+    }
 }

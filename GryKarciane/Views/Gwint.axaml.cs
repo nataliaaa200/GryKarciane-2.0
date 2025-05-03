@@ -5,14 +5,52 @@ using System.Collections.Generic;
 using System;
 using Avalonia.Interactivity;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
+using Avalonia.Threading;
+using Avalonia.Media;
+using static GryKarciane.Gapa;
+using System.Diagnostics;
 
 namespace GryKarciane;
 
 public partial class Gwint : Window
 {
 
+    public class GameResult
 
-    public class GwentCard
+    {
+        public string PlayerName { get; set; }
+        public string Wynik { get; set; }
+        public bool IsWin { get; set; }
+    }
+
+    public static class GameResultSaver
+    {
+        private static readonly string FilePath = "wyniki_gwint.json";
+
+        public static void SaveResult(GameResult result)
+        {
+            List<GameResult> results = LoadResults();
+
+            results.Add(result);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(results, options);
+            File.WriteAllText(FilePath, json);
+        }
+        public static List<GameResult> LoadResults()
+        {
+            if (!File.Exists(FilePath))
+                return new List<GameResult>();
+
+            string json = File.ReadAllText(FilePath);
+
+            return JsonSerializer.Deserialize<List<GameResult>>(json) ?? new List<GameResult>();
+        }
+    }
+        public class GwentCard
     {
         public int Power { get; set; }
         // public string Name { get; set; }
@@ -42,13 +80,14 @@ public partial class Gwint : Window
     private bool isRoundOver = false;
     private StackPanel komputerRowPanel;
     private StackPanel playerRowPanel;
-    
-    
-    
-    
-    public Gwint(string PlayerName)
+
+    private readonly string playerName;
+
+
+    public Gwint(string playerName)
     {
         InitializeComponent();
+        this.playerName = playerName;
         StartGame();
     }
 
@@ -264,7 +303,7 @@ public partial class Gwint : Window
             if (passButton != null)
                 passButton.IsVisible = false;
 
-            ShowGameResult();
+           // ShowGameResult();
         }
         else
         {
@@ -323,6 +362,17 @@ public partial class Gwint : Window
                 btn.IsEnabled = false;
             }
         }
+
+        var result = new GameResult
+        {
+            PlayerName = playerName,
+            Wynik = $"{playerScore}:{computerScore}",
+            IsWin = (playerScore>computerScore)
+        };
+
+        GameResultSaver.SaveResult(result);
+
+       
     }
 
 }
