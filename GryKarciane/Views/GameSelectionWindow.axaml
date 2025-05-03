@@ -12,7 +12,7 @@
 	<StackPanel Margin="20" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
 		<TextBlock Text="{Binding WelcomeMessage}" FontSize="18" Margin="0,0,0,20"/>
 
-		<Button Content="Poker" Width="200" />
+		<Button Content="Oczko" Width="200" Click="Oczko_Click"/>
 		<Button Content="Gapa" Width="200" Click="Gapa_Click" />
 		<Button Content="Wojna" Width="200" />
 	</StackPanel>

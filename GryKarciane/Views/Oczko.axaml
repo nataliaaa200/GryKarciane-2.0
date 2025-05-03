@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GryKarciane.Oczko"
+        Title="Oczko"
+        Width="600" Height="400">
+
+	<StackPanel>
+		<!-- Panel na karty gracza -->
+		<StackPanel x:Name="CardsPanel" Orientation="Horizontal" HorizontalAlignment="Center" />
+
+		<!-- Inne elementy UI, np. wynik -->
+		<TextBlock x:Name="ScoreLabel" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+		<Button Content="Dobierz kartę" Click="DrawCard_Click" Margin="10"/>
+		<Button Content="Pas" Click="Pass_Click" Margin="10"/>
+	</StackPanel>
+</Window>
+
+
+

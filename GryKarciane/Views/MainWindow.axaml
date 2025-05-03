@@ -9,7 +9,7 @@
 	</UserControl.DataContext>
 
 	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
-		<TextBlock Text="Wybierz grę karcianą" FontSize="24" FontWeight="Bold"/>
+		<TextBlock Text="Gry Karciane" FontSize="24" FontWeight="Bold"/>
 		<TextBlock Text="Login:" FontSize="16"/>
 		<TextBox Width="200" Name="LoginBox" Text="{Binding Login}" />
 

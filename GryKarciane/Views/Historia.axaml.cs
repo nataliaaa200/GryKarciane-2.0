@@ -3,6 +3,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System.Xml.Serialization;
+using GryKarciane.Views;
+
 
 namespace GryKarciane;
 
@@ -21,7 +23,8 @@ public partial class Historia : Window
 
     private void Oczko_Click(object? sender, RoutedEventArgs e)
     {
-
+        var historiaOczko = new HistoriaOczko();
+        historiaOczko.Show();
     }
 
     private void Kinga_Click(object? sender, RoutedEventArgs e)

@@ -29,6 +29,19 @@ namespace GryKarciane.Views
             this.Hide();
         }
 
+        private void Oczko_Click(object sender, RoutedEventArgs e)
+        {
+            var oczkoOkno = new Oczko(PlayerName);
+
+            oczkoOkno.Closed += (s, args) =>
+            {
+                this.Show();
+            };
+
+            oczkoOkno.Show();
+            this.Hide();
+        }
+
 
 
         // Dodajmy logikę zamknięcia gry

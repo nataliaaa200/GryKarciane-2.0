@@ -16,4 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\GryKarciane\GryKarciane.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Aski\Cards\*.png" />
+	</ItemGroup>
+
 </Project>
