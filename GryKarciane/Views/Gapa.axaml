@@ -4,7 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GryKarciane.Gapa"
-        Title="Gapa">
+        Title="Gapa"
+		Background="White"
+		>
 	<StackPanel>
 		<TextBlock Text="Karta na stosie:" Margin="10"/>
 		<TextBlock x:Name="TopCardView"
