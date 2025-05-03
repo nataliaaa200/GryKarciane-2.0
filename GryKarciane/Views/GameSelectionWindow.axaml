@@ -15,6 +15,8 @@
 		<Button Content="Poker" Width="200" />
 		<Button Content="Gapa" Width="200" Click="Gapa_Click" />
 		<Button Content="Wojna" Width="200" />
+		<Button Content="Gwint" Width="200" Click="Gwint_Click" />
+
 	</StackPanel>
 </Window>
 

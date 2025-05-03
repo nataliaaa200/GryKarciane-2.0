@@ -29,6 +29,19 @@ namespace GryKarciane.Views
             this.Hide();
         }
 
+        private void Gwint_Click(object sender, RoutedEventArgs e)
+        {
+            var gwintOkno = new Gwint(PlayerName);
+
+            gwintOkno.Closed += (s, args) =>
+            {
+                this.Show(); // Po zamknięciu Gapy pokaż z powrotem to okno
+            };
+
+            gwintOkno.Show();
+            this.Hide();
+        }
+
 
 
         // Dodajmy logikę zamknięcia gry
