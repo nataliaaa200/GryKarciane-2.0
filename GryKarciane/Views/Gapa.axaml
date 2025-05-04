@@ -16,6 +16,6 @@
 					Orientation="Horizontal"
 					Margin="10"/>
 
-		<Button Content="Dobierz kartę" Click="DrawCard_Click" Width="120" Margin="10"/>
+		<Button Content="Dobierz kartę" Click="DrawCard_Click" Width="120" Margin="10" Background="LightGray"/>
 	</StackPanel>
 </Window>
