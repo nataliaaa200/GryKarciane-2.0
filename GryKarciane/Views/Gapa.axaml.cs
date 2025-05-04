@@ -88,6 +88,8 @@ public partial class Gapa : Window
     public Gapa(string playerName)
     {
         InitializeComponent();
+        this.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Light;
+
         this.playerName = playerName;
         StartGame();
 

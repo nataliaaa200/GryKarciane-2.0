@@ -5,7 +5,6 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GryKarciane.Gapa"
         Title="Gapa"
-		Background="White"
 		>
 	<StackPanel>
 		<TextBlock Text="Karta na stosie:" Margin="10"/>
