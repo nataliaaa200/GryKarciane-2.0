@@ -53,6 +53,7 @@ public partial class Gwint : Window
         public class GwentCard
     {
         public int Power { get; set; }
+        public int Row { get; set; }
         // public string Name { get; set; }
 
         // Losowanie karty o losowej mocy od 1 do 10
@@ -61,7 +62,7 @@ public partial class Gwint : Window
             return new GwentCard
             {
                 Power = rng.Next(1, 11),  // Si³a karty od 1 do 10
-                                          //     Name = $"Karta {rng.Next(1, 11)}"
+                Row = rng.Next(0, 2)                        
             };
         }
 
@@ -80,6 +81,8 @@ public partial class Gwint : Window
     private bool isRoundOver = false;
     private StackPanel komputerRowPanel;
     private StackPanel playerRowPanel;
+    private StackPanel komputerRowPanel2;
+    private StackPanel playerRowPanel2;
 
     private readonly string playerName;
 
@@ -99,6 +102,9 @@ public partial class Gwint : Window
         komputerRowPanel = this.FindControl<StackPanel>("ComputerRowPanel");
         playerRowPanel = this.FindControl<StackPanel>("PlayerRowPanel");
         PlayerCardPanel = this.FindControl<StackPanel>("PlayerCardPanel");
+        komputerRowPanel2 = this.FindControl<StackPanel>("ComputerRowPanel2");
+        playerRowPanel2 = this.FindControl<StackPanel>("PlayerRowPanel2");
+
         //ComputerCardPanel = this.FindControl<StackPanel>("ComputerCardPanel");
         GameBoardPanel = this.FindControl<StackPanel>("GameBoardPanel");
         GameResultText = this.FindControl<TextBlock>("GameResultText");
@@ -126,7 +132,8 @@ public partial class Gwint : Window
                 Content = card.ToString(),
                 Width = 80,
                 Height = 50,
-                Margin = new Thickness(5)
+                Margin = new Thickness(5),
+                Background = card.Row == 0 ? Brushes.LightGreen : Brushes.LightBlue
             };
             btn.Click += (s, args) => PlayCard(card);
             PlayerCardPanel.Children.Add(btn);
@@ -184,7 +191,11 @@ public partial class Gwint : Window
         };
 
         // Dodaj kartê gracza na planszê
-        playerRowPanel.Children.Add(playerCardBtn);
+        if (playerCard.Row == 0)
+            playerRowPanel.Children.Add(playerCardBtn);
+        else
+            playerRowPanel2.Children.Add(playerCardBtn);
+
 
         // Usuwamy przycisk z panelu gracza (po zagraniu)
         var cardButton = PlayerCardPanel.Children.OfType<Button>().FirstOrDefault(b => b.Content.ToString() == playerCard.ToString());
@@ -207,11 +218,17 @@ public partial class Gwint : Window
                 Width = 80,
                 Height = 50,
                 Margin = new Thickness(5),
-                IsEnabled = false  // Zablokuj mo¿liwoœæ klikniêcia po zagrywce
+                IsEnabled = false, // Zablokuj mo¿liwoœæ klikniêcia po zagrywce
+                Background = computerCard.Row == 0 ? Brushes.White : Brushes.LightBlue
+
             };
 
             // Dodaj kartê komputera na planszê
-            komputerRowPanel.Children.Add(computerCardBtn);
+            if (computerCard.Row == 0)
+                komputerRowPanel.Children.Add(computerCardBtn);
+            else
+                komputerRowPanel2.Children.Add(computerCardBtn);
+
 
             // Wyœwietl wynik rundy
             UpdateRoundResult(playerCard, computerCard);
@@ -232,6 +249,9 @@ public partial class Gwint : Window
         // Usuñ wszystkie karty z planszy
         playerRowPanel.Children.Clear();
         komputerRowPanel.Children.Clear();
+        playerRowPanel2.Children.Clear();
+        komputerRowPanel2.Children.Clear();
+
 
         // Usuwamy karty gracza i komputera
         playerPlayedCards.Clear();

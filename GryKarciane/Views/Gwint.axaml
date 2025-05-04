@@ -26,9 +26,12 @@
 		<StackPanel x:Name="GameBoardPanel" Orientation="Vertical" Margin="10" Grid.Row="1">
 			<TextBlock Text="Komputer:" FontWeight="Bold" Margin="0,5"/>
 			<StackPanel x:Name="ComputerRowPanel" Orientation="Horizontal" Background="LightGray"/>
+			<StackPanel Name="ComputerRowPanel2" Orientation="Horizontal" />
 
 			<TextBlock Text="Gracz:" FontWeight="Bold" Margin="10,10,0,5"/>
-			<StackPanel x:Name="PlayerRowPanel" Orientation="Horizontal" Background="LightBlue"/>
+			<StackPanel x:Name="PlayerRowPanel" Orientation="Horizontal" Background="LightGreen"/>
+			<StackPanel Name="PlayerRowPanel2" Orientation="Horizontal" Background="LightBlue" />
+
 		</StackPanel>
 
 		<!-- Karty gracza -->
