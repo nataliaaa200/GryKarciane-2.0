@@ -10,5 +10,7 @@
 		<Button Content="Oczko" Width="100" Height="40" Click="Oczko_Click"/>
 		<Button Content="Gapa" Width="100" Height="40" Click="Gapa_Click"/>
 		<Button Content="Cos Kingi" Width="100" Height="40" Click="Kinga_Click"/>
+		<Button Content="Gwint" Width="100" Height="40" Click="Gwint_Click"/>
+
 	</StackPanel>
 </Window>
