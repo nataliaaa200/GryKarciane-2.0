@@ -245,37 +245,36 @@ public partial class Gwint : Window
 
     private void PassRound(object sender, RoutedEventArgs e)
     {
-        // Usuñ wszystkie karty z planszy
+        // Usuñ karty z planszy
         playerRowPanel.Children.Clear();
         komputerRowPanel.Children.Clear();
         playerRowPanel2.Children.Clear();
         komputerRowPanel2.Children.Clear();
 
-        // Usuwamy karty gracza i komputera
+        // Oblicz punkty za rundê
+        playerTotalPower = SumCardPowers(playerPlayedCards);
+        computerTotalPower = SumCardPowers(computerPlayedCards);
+
+        if (computerTotalPower > playerTotalPower)
+            computerScore++;
+        else if (playerTotalPower > computerTotalPower)
+            playerScore++;
+
+        // Zwiêksz licznik rund
+        roundsPlayed++;
+
+        // Wyczyœæ listy zagranych kart
         playerPlayedCards.Clear();
         computerPlayedCards.Clear();
 
-        // Sumujemy punkty rundy
-        if (computerTotalPower > playerTotalPower)
-        {
-            computerScore++;
-        }
-        else if (playerTotalPower > computerTotalPower)
-        {
-            playerScore++;
-        }
-
-        // Zwiêkszenie liczby rund
-        roundsPlayed++;
-
-        // Sprawdzenie, czy gra siê koñczy z powodu 3 rund
+        // Czy koniec gry?
         if (roundsPlayed == 3 || playerCards.Count == 0)
         {
             ShowGameResult();
             return;
         }
 
-        // Reset panelu gracza
+        // Odswie¿ panel gracza tylko jeœli ma jeszcze karty
         PlayerCardPanel.Children.Clear();
 
         if (playerCards.Count > 0)
@@ -294,7 +293,7 @@ public partial class Gwint : Window
                 PlayerCardPanel.Children.Add(btn);
             }
 
-            // Dodaj przycisk Pass
+            // Dodaj Pass tylko jeœli s¹ karty
             var passButton = new Button
             {
                 Content = "Pass",
@@ -306,8 +305,9 @@ public partial class Gwint : Window
             PlayerCardPanel.Children.Add(passButton);
         }
 
-        GameResultText.Text = $"Runda {roundsPlayed} zakoñczona! Wybierz kartê lub kliknij Pass, aby graæ dalej.";
+        GameResultText.Text = $"Runda {roundsPlayed} zakoñczona! Wybierz kartê lub Pass, aby kontynuowaæ.";
     }
+
 
 
 
