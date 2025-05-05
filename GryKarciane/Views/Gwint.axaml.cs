@@ -111,7 +111,6 @@ public partial class Gwint : Window
     }
     private void StartGame()
     {
-        // Przygotowanie kart testowych
 
 
         playerCards = Enumerable.Range(0, 10).Select(_ => GwentCard.RandomCard(rng)).ToList();
@@ -252,40 +251,11 @@ public partial class Gwint : Window
         playerRowPanel2.Children.Clear();
         komputerRowPanel2.Children.Clear();
 
-
         // Usuwamy karty gracza i komputera
         playerPlayedCards.Clear();
         computerPlayedCards.Clear();
 
-        // Resetowanie kart w panelu gracza
-        PlayerCardPanel.Children.Clear();
-        foreach (var card in playerCards)
-        {
-            var btn = new Button
-            {
-                Content = card.ToString(),
-                Width = 80,
-                Height = 50,
-                Margin = new Thickness(5)
-            };
-            btn.Click += (s, args) => PlayCard(card);
-            PlayerCardPanel.Children.Add(btn);
-        }
-
-        // Resetowanie kart w panelu komputera
-        // ComputerCardPanel.Children.Clear();
-        foreach (var card in computerCards)
-        {
-            var btn = new Button
-            {
-                Content = card.ToString(),
-                Width = 80,
-                Height = 50,
-                Margin = new Thickness(5)
-            };
-            btn.IsEnabled = false;  // Karty komputera s¹ wy³¹cznie do podgl¹du
-                                    // ComputerCardPanel.Children.Add(btn);
-        }
+        // Sumujemy punkty rundy
         if (computerTotalPower > playerTotalPower)
         {
             computerScore++;
@@ -294,45 +264,51 @@ public partial class Gwint : Window
         {
             playerScore++;
         }
+
         // Zwiêkszenie liczby rund
         roundsPlayed++;
 
-
-        // Sprawdzenie, czy gra jest zakoñczona
-        if (roundsPlayed == 3)
+        // Sprawdzenie, czy gra siê koñczy z powodu 3 rund
+        if (roundsPlayed == 3 || playerCards.Count == 0)
         {
             ShowGameResult();
-        }
-        else
-        {
-            // Czekamy na rozpoczêcie nowej rundy
-            GameResultText.Text = $"Runda {roundsPlayed} zakoñczona! Kliknij Pass, aby kontynuowaæ!";
-        }
-        // Dodaj przycisk Pass z powrotem po wyczyszczeniu panelu
-        var passButton = new Button
-        {
-            Content = "Pass",
-            Width = 80,
-            Height = 40,
-            Margin = new Thickness(10)
-        };
-        passButton.Click += PassRound;
-        PlayerCardPanel.Children.Add(passButton);
-        if (roundsPlayed == 3)
-        {
-            if (passButton != null)
-                passButton.IsVisible = false;
-
-           // ShowGameResult();
-        }
-        else
-        {
-            GameResultText.Text = $"Runda {roundsPlayed} zakoñczona! Wybierz dowoln¹ kartê aby graæ dalej";
+            return;
         }
 
+        // Reset panelu gracza
+        PlayerCardPanel.Children.Clear();
 
+        if (playerCards.Count > 0)
+        {
+            foreach (var card in playerCards)
+            {
+                var btn = new Button
+                {
+                    Content = card.ToString(),
+                    Width = 80,
+                    Height = 50,
+                    Margin = new Thickness(5),
+                    Background = card.Row == 0 ? Brushes.LightGreen : Brushes.LightBlue
+                };
+                btn.Click += (s, args) => PlayCard(card);
+                PlayerCardPanel.Children.Add(btn);
+            }
 
+            // Dodaj przycisk Pass
+            var passButton = new Button
+            {
+                Content = "Pass",
+                Width = 80,
+                Height = 40,
+                Margin = new Thickness(10)
+            };
+            passButton.Click += PassRound;
+            PlayerCardPanel.Children.Add(passButton);
+        }
+
+        GameResultText.Text = $"Runda {roundsPlayed} zakoñczona! Wybierz kartê lub kliknij Pass, aby graæ dalej.";
     }
+
 
 
 
