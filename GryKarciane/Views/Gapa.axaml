@@ -11,7 +11,7 @@
 		<TextBlock x:Name="TopCardView"
            HorizontalAlignment="Center"
            Margin="10"/>
-		<StackPanel x:Name="PlayerCardsPanel"
+		<WrapPanel x:Name="PlayerCardsPanel"
 					Orientation="Horizontal"
 					Margin="10"/>
 

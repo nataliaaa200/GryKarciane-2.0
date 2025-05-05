@@ -90,6 +90,8 @@ public partial class Gwint : Window
     public Gwint(string playerName)
     {
         InitializeComponent();
+        this.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Light;
+
         this.playerName = playerName;
         StartGame();
     }
