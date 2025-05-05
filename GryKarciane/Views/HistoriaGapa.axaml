@@ -7,6 +7,9 @@
         Title="HistoriaGapa">
 	<StackPanel Margin="10">
 		<TextBlock Text="Historia wyników" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-		<ListBox x:Name="ResultsList"/>
+		<ScrollViewer Height="780" VerticalScrollBarVisibility="Auto">
+
+			<ListBox x:Name="ResultsList"/>
+			</ScrollViewer>
 	</StackPanel>
 </Window>
