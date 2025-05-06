@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GryKarciane.Views.CzteryKarty"
+        Width="700" Height="500"
+        Title="Cztery Karty">
+
+	<Grid>
+		<!-- Definiujemy wiersze: jeden na stos (górna część), drugi na karty (dolna część) -->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<!-- Stos na górze -->
+			<RowDefinition Height="*"/>
+			<!-- Karty gracza na dole -->
+		</Grid.RowDefinitions>
+
+		<!-- Sekcja dla stosu -->
+		<StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 10">
+			<TextBlock Text="Stos" FontSize="24" HorizontalAlignment="Center" Margin="0, 10"/>
+			<!-- Tu możesz dodać obrazek reprezentujący stos lub jakieś dodatkowe elementy -->
+			<Image Name="DeckImage" Width="100" Height="150" Source="avares://GryKarciane/Aski/Cards/back.png" />
+			<!-- Tekst informujący o liczbie kart -->
+			<TextBlock Name="DeckInfo" Text="Stos: 44 karty" FontSize="14" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+			<!-- Przycisk do ponownego tasowania -->
+			<Button Name="ShuffleButton" Content="Potasuj ponownie" Click="ShuffleButton_Click"
+					IsVisible="False" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+		</StackPanel>
+
+		<!-- Sekcja dla kart gracza -->
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Spacing="10">
+			<Button Name="Card1" Width="100" Height="150" Click="Card_Click">
+				<Image Name="Card1Image" Width="100" Height="150" />
+			</Button>
+			<Button Name="Card2" Width="100" Height="150" Click="Card_Click">
+				<Image Name="Card2Image" Width="100" Height="150" />
+			</Button>
+			<Button Name="Card3" Width="100" Height="150" Click="Card_Click">
+				<Image Name="Card3Image" Width="100" Height="150" />
+			</Button>
+			<Button Name="Card4" Width="100" Height="150" Click="Card_Click">
+				<Image Name="Card4Image" Width="100" Height="150" />
+			</Button>
+		</StackPanel>
+	</Grid>
+</Window>

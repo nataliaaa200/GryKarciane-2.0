@@ -14,7 +14,18 @@ namespace GryKarciane.Views
             PlayerName = playerName;
         }
 
+        private void CzteryKarty_Click(object sender, RoutedEventArgs e)
+        {
+            var czteryKartyOkno = new CzteryKarty(PlayerName); // zakładamy że masz klasę `CzteryKartyWindow`
 
+            czteryKartyOkno.Closed += (s, args) =>
+            {
+                this.Show(); // Po zamknięciu gry pokaż z powrotem menu
+            };
+
+            czteryKartyOkno.Show();
+            this.Hide();
+        }
 
         private void Gapa_Click(object sender, RoutedEventArgs e)
         {

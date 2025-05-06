@@ -14,7 +14,7 @@
 
 		<Button Content="Oczko" Width="200" Click="Oczko_Click"/>
 		<Button Content="Gapa" Width="200" Click="Gapa_Click" />
-		<Button Content="Wojna" Width="200" />
+		<Button Content="Cztery Karty" Width="200" Click="CzteryKarty_Click"/>
 		<Button Content="Gwint" Width="200" Click="Gwint_Click" />
 
 	</StackPanel>
