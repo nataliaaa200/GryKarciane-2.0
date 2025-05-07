@@ -12,11 +12,49 @@ using System.Linq;
 using GryKarciane.ViewModels;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.IO;
+using System.Timers;
+using System.Diagnostics;
+using Avalonia.Threading;
 
 namespace GryKarciane.Views;
 
 public partial class CzteryKarty : Window
 {
+    public class GameResult
+    {
+        public string PlayerName { get; set; }
+        public bool IsWin { get; set; }
+    }
+
+    public static class GameResultSaver
+    {
+        private static readonly string FilePath = "wyniki_czteryKarty.json";
+
+        public static void SaveResult(GameResult result)
+        {
+            List<GameResult> results = LoadResults();
+
+            results.Add(result);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(results, options);
+            File.WriteAllText(FilePath, json);
+        }
+
+        public static List<GameResult> LoadResults()
+        {
+            if (!File.Exists(FilePath))
+                return new List<GameResult>();
+
+            string json = File.ReadAllText(FilePath);
+
+            return JsonSerializer.Deserialize<List<GameResult>>(json) ?? new List<GameResult>();
+        }
+    }
+
     private string _playerName;
     private int selectedCardIndex = -1;
     private Deck deck;
@@ -80,11 +118,24 @@ public partial class CzteryKarty : Window
                         var winner = player.Name;
                         MessageBox.Show(this, $"{winner} wygral!", "Wygrana");
                     }
-                    computer.MakeMove(deck);
-                    if (computer.HasFourOfAKind())
+                    else
                     {
-                        var winner = computer.Name;
-                        MessageBox.Show(this, $"{winner} wygral!", "Wygrana");
+                        computer.MakeMove(deck);
+                        if (computer.HasFourOfAKind())
+                        {
+                            var winner = computer.Name;
+                            MessageBox.Show(this, $"{winner} wygral!", "Wygrana");
+                        }
+                    }
+                    if (player.HasFourOfAKind() || computer.HasFourOfAKind())
+                    {
+                        var result = new GameResult
+                        {
+                            PlayerName = _playerName,
+                            IsWin = player.HasFourOfAKind()
+                        };
+
+                        GameResultSaver.SaveResult(result);
                     }
                 }
             }

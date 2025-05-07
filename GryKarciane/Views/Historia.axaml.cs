@@ -27,9 +27,10 @@ public partial class Historia : Window
         historiaOczko.Show();
     }
 
-    private void Kinga_Click(object? sender, RoutedEventArgs e)
+    private void CzteryKarty_Click(object? sender, RoutedEventArgs e)
     {
-
+        var historiaCzteryKarty = new HistoriaCzteryKarty();
+        historiaCzteryKarty.Show();
     }
 
     private void Gwint_Click(object? sender, RoutedEventArgs e)
